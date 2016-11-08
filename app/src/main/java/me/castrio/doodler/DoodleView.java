@@ -71,6 +71,10 @@ public class DoodleView extends View {
         _currWidth = size;
     }
 
+    public int getSize() {
+        return this._currWidth;
+    }
+
     public void setOpacity(int opacity) {
         _currOpacity = opacity;
     }

@@ -43,16 +43,16 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        // Handle Size button
-        Button buttonSetSize = (Button) findViewById(R.id.roundButtonSize);
-        buttonSetSize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
-                doodleView.setSize(5);
-
-            }
-        });
+//        // Handle Size button
+//        Button buttonSetSize = (Button) findViewById(R.id.roundButtonSize);
+//        buttonSetSize.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+//                doodleView.setSize(5);
+//
+//            }
+//        });
 
         // Handle Opacity button
         Button buttonSetOpacity = (Button) findViewById(R.id.roundButtonOpacity);
@@ -149,13 +149,78 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
-                        doodleView.setColor(_penColorSaved);
+                        doodleView.setColor(_penSizeSaved);
                     }
                 });
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
+
+    private int _penSizeSaved = -1;
+    // Credit: Jon Froehlich code shared with UMD CMSC434 class
+    public void onClickSetSize(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+        _penSizeSaved = doodleView.getSize();
+
+        // Get the layout inflater. LayoutInflaters take a layout XML file and create its
+        // corresponding View objects. Never create LayoutInflaters directly. Always use the
+        // factory method getLayoutInflater. See https://developer.android.com/reference/android/view/LayoutInflater.html
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        // Inflate the dialog_color.xml layout and create the View
+        final View dialogView = inflater.inflate(R.layout.size_dialog, null);
+
+        // Get access to the seakbar on this dialog.
+        SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarSizeDialog);
+
+        // Set progress bar to current hue value (in other words, when the user first sees
+        // this seek bar, it's already set to the size value of the current path)
+        int seekBarPosition = (int)((_penSizeSaved / 50) * (float)seekBar.getMax());
+        seekBar.setProgress(seekBarPosition);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+                //hue is value 0 - 360. Saturation and luminance are 0-1.
+                int newPenSize = (progress / seekBar.getMax()) * 50;
+                doodleView.setSize(newPenSize);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //not implemented
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //not implemented
+            }
+        });
+
+        // This is the method that allows us to use our own custom view. We set the AlertDialog builder
+        // to the view we created with the inflater above.
+        builder.setView(dialogView)
+                // Add action buttons
+                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
+                        doodleView.setSize(_penSizeSaved);
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 
 }
