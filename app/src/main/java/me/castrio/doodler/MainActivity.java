@@ -54,15 +54,15 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        // Handle Opacity button
-        Button buttonSetOpacity = (Button) findViewById(R.id.roundButtonOpacity);
-        buttonSetOpacity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
-                doodleView.setOpacity(150);
-            }
-        });
+//        // Handle Opacity button
+//        Button buttonSetOpacity = (Button) findViewById(R.id.roundButtonOpacity);
+//        buttonSetOpacity.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+//                doodleView.setOpacity(150);
+//            }
+//        });
 
         SeekBar newSeekBar = (SeekBar) findViewById(R.id.seekBarNew);
         newSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -221,6 +221,72 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
+    private int _penOpacitySaved = -1;
+    // Credit: Jon Froehlich code shared with UMD CMSC434 class
+    public void onClickSetOpacity(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+        _penOpacitySaved = doodleView.getOpacity();
+
+        // Get the layout inflater. LayoutInflaters take a layout XML file and create its
+        // corresponding View objects. Never create LayoutInflaters directly. Always use the
+        // factory method getLayoutInflater. See https://developer.android.com/reference/android/view/LayoutInflater.html
+        LayoutInflater inflater = this.getLayoutInflater();
+
+        // Inflate the dialog_color.xml layout and create the View
+        final View dialogView = inflater.inflate(R.layout.opacity_dialog, null);
+
+        // Get access to the seekbar on this dialog.
+        SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarOpacityDialog);
+
+        // Set progress bar to current hue value (in other words, when the user first sees
+        // this seek bar, it's already set to the hue value of the background)
+        int seekBarPosition = (int)((_penOpacitySaved / 255f) * (float)seekBar.getMax());
+        seekBar.setProgress(seekBarPosition);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+                //hue is value 0 - 360. Saturation and luminance are 0-1.
+                int newPenOpacity = (int)((progress / (float)seekBar.getMax()) * 255f);
+                doodleView.setOpacity(newPenOpacity);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //not implemented
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //not implemented
+            }
+        });
+
+        // This is the method that allows us to use our own custom view. We set the AlertDialog builder
+        // to the view we created with the inflater above.
+        builder.setView(dialogView)
+                // Add action buttons
+                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
+                        doodleView.setColor(_penOpacitySaved);
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 
 
 }

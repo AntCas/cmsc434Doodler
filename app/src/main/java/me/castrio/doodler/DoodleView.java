@@ -79,6 +79,10 @@ public class DoodleView extends View {
         _currOpacity = opacity;
     }
 
+    public int getOpacity() {
+        return this._currOpacity;
+    }
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
