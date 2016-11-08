@@ -62,6 +62,10 @@ public class DoodleView extends View {
     public void setColor(int color) {
         _currColor = color;
     }
+
+    public int getColor() {
+        return this._currColor;
+    }
     
     public void setSize(int size) {
         _currWidth = size;
