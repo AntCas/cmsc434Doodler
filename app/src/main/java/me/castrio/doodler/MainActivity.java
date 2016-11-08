@@ -1,6 +1,7 @@
 package me.castrio.doodler;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,14 +28,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button buttonClearScreen = (Button) findViewById(R.id.buttonClearScreen);
-//        buttonClearScreen.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DoodleView doodleView = (DoodleView) findViewById(R.id)
-//            }
-//        });
-//    }
+        // Handle Color button
+        Button buttonSetColor = (Button) findViewById(R.id.roundButtonSetColor);
+        buttonSetColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+                doodleView.setColor(Color.GREEN);
+
+            }
+        });
+
         SeekBar newSeekBar = (SeekBar) findViewById(R.id.seekBarNew);
         newSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -59,13 +63,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void onClickResetColor(View v) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//
-//        builder.setMessage("Reset color?")
-//                .setTitle("Do you want to reset the color?");
-//
-//        builder.setPositiveButton()
-//
-//    }
 }

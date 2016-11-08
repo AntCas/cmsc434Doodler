@@ -11,15 +11,30 @@ import android.view.View;
 
 import org.w3c.dom.Attr;
 
+import java.util.ArrayList;
+
 /**
  * Created by anthonycastrio on 11/3/16.
  */
 
 public class DoodleView extends View {
-    private Paint _paintDoodle = new Paint();
-    private Path _path = new Path();
+    private ArrayList<Line> _lineList = new ArrayList<Line>();
     private Canvas _canvas = new Canvas();
-    private Boolean _clear = new Boolean(false);
+    private int _currColor;
+    
+    private class Line {
+        Path _path = new Path();
+        Paint _paint = new Paint();
+        
+        Line(Path path, Paint paint) {
+            _path = path;
+            _paint = paint;
+        }
+        
+        void drawLine (Canvas canvas) {
+            canvas.drawPath(_path, _paint);
+        }
+    }
 
     public DoodleView(Context context) {
         super(context);
@@ -37,16 +52,19 @@ public class DoodleView extends View {
     }
 
     private void init(AttributeSet attrs, int defStyle) {
-        _paintDoodle.setColor(Color.BLUE);
-        _paintDoodle.setAntiAlias(true);
-        _paintDoodle.setStyle(Paint.Style.STROKE);
+        _currColor = Color.BLUE;
     }
 
+    public void setColor(int color) {
+        _currColor = color;
+    }
 
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawPath(_path, _paintDoodle);
+        for (Line line : _lineList) {
+            line.drawLine(canvas);
+        }
     }
 
     @Override
@@ -54,24 +72,33 @@ public class DoodleView extends View {
         float touchx = motionEvent.getX();
         float touchy = motionEvent.getY();
 
+        Path path;
+        Paint paint = new Paint();
+
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                _path.moveTo(touchx, touchy);
+                path = new Path();
+                paint.setColor(_currColor);
+                paint.setAntiAlias(true);
+                paint.setStyle(Paint.Style.STROKE);
+                path.moveTo(touchx, touchy);
+                _lineList.add(new Line(path, paint));
                 break;
             case MotionEvent.ACTION_MOVE:
-                _path.lineTo(touchx, touchy);
+                path = _lineList.get(_lineList.size() - 1)._path;
+                path.lineTo(touchx, touchy);
                 break;
             case MotionEvent.ACTION_UP:
                 break;
         }
-
+        
         invalidate();
         return true;
     }
 
     // Redraws the entire canvas white
     public void clearCanvas() {
-        _path.reset();
+        _lineList.clear();
         invalidate();
     }
 }
