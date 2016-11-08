@@ -36,11 +36,20 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:text="Button"
+        android:text="Color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/roundButtonSetColor"
+        android:id="@+id/roundButtonColor"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/roundButtonColor"
+        android:layout_toEndOf="@+id/roundButtonColor"
+        android:id="@+id/roundButtonSize" />
 </RelativeLayout>

@@ -21,6 +21,7 @@ public class DoodleView extends View {
     private ArrayList<Line> _lineList = new ArrayList<Line>();
     private Canvas _canvas = new Canvas();
     private int _currColor;
+    private int _currWidth;
     
     private class Line {
         Path _path = new Path();
@@ -58,6 +59,10 @@ public class DoodleView extends View {
     public void setColor(int color) {
         _currColor = color;
     }
+    
+    public void setSize(int size) {
+        _currWidth = size;
+    }
 
     @Override
     public void onDraw(Canvas canvas) {
@@ -79,6 +84,7 @@ public class DoodleView extends View {
             case MotionEvent.ACTION_DOWN:
                 path = new Path();
                 paint.setColor(_currColor);
+                paint.setStrokeWidth(_currWidth);
                 paint.setAntiAlias(true);
                 paint.setStyle(Paint.Style.STROKE);
                 path.moveTo(touchx, touchy);

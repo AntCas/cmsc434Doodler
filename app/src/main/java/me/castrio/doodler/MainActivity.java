@@ -1,14 +1,11 @@
 package me.castrio.doodler;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,12 +26,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Handle Color button
-        Button buttonSetColor = (Button) findViewById(R.id.roundButtonSetColor);
+        Button buttonSetColor = (Button) findViewById(R.id.roundButtonColor);
         buttonSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
                 doodleView.setColor(Color.GREEN);
+
+            }
+        });
+
+        // Handle Size button
+        Button buttonSetSize = (Button) findViewById(R.id.roundButtonSize);
+        buttonSetSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+                doodleView.setSize(5);
 
             }
         });
