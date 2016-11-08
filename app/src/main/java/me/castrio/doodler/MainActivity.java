@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
-                        doodleView.setColor(_penSizeSaved);
+                        doodleView.setColor(_penColorSaved);
                     }
                 });
 
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
                 //hue is value 0 - 360. Saturation and luminance are 0-1.
-                int newPenSize = (progress / seekBar.getMax()) * 50;
+                int newPenSize = (int)((progress / (float)seekBar.getMax()) * 50f);
                 doodleView.setSize(newPenSize);
             }
 
