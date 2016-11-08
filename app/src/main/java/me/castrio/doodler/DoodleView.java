@@ -22,6 +22,7 @@ public class DoodleView extends View {
     private Canvas _canvas = new Canvas();
     private int _currColor;
     private int _currWidth;
+    private int _currOpacity;
     
     private class Line {
         Path _path = new Path();
@@ -54,6 +55,8 @@ public class DoodleView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         _currColor = Color.BLUE;
+        _currWidth = 1;
+        _currOpacity = 255;
     }
 
     public void setColor(int color) {
@@ -62,6 +65,10 @@ public class DoodleView extends View {
     
     public void setSize(int size) {
         _currWidth = size;
+    }
+
+    public void setOpacity(int opacity) {
+        _currOpacity = opacity;
     }
 
     @Override
@@ -85,6 +92,7 @@ public class DoodleView extends View {
                 path = new Path();
                 paint.setColor(_currColor);
                 paint.setStrokeWidth(_currWidth);
+                paint.setAlpha(_currOpacity);
                 paint.setAntiAlias(true);
                 paint.setStyle(Paint.Style.STROKE);
                 path.moveTo(touchx, touchy);

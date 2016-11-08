@@ -47,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Handle Opacity button
+        Button buttonSetOpacity = (Button) findViewById(R.id.roundButtonOpacity);
+        buttonSetOpacity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+                doodleView.setOpacity(150);
+            }
+        });
+
         SeekBar newSeekBar = (SeekBar) findViewById(R.id.seekBarNew);
         newSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
