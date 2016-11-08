@@ -176,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
         // Get access to the seakbar on this dialog.
         SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarSizeDialog);
 
-        // Set progress bar to current hue value (in other words, when the user first sees
+        // Set progress bar to current size value (in other words, when the user first sees
         // this seek bar, it's already set to the size value of the current path)
-        int seekBarPosition = (int)((_penSizeSaved / 50) * (float)seekBar.getMax());
+        int seekBarPosition = (int)((_penSizeSaved / 50f) * (float)seekBar.getMax());
         seekBar.setProgress(seekBarPosition);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
