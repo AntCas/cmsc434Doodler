@@ -18,6 +18,8 @@ import org.w3c.dom.Attr;
 public class DoodleView extends View {
     private Paint _paintDoodle = new Paint();
     private Path _path = new Path();
+    private Canvas _canvas = new Canvas();
+    private Boolean _clear = new Boolean(false);
 
     public DoodleView(Context context) {
         super(context);
@@ -40,10 +42,10 @@ public class DoodleView extends View {
         _paintDoodle.setStyle(Paint.Style.STROKE);
     }
 
+
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         canvas.drawPath(_path, _paintDoodle);
     }
 
@@ -65,5 +67,11 @@ public class DoodleView extends View {
 
         invalidate();
         return true;
+    }
+
+    // Redraws the entire canvas white
+    public void clearCanvas() {
+        _path.reset();
+        invalidate();
     }
 }
