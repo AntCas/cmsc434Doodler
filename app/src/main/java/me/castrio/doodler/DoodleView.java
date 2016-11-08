@@ -55,7 +55,7 @@ public class DoodleView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
         _currColor = Color.BLUE;
-        _currWidth = 1;
+        _currWidth = 5;
         _currOpacity = 255;
     }
 
