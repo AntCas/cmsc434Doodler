@@ -93,15 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickSetColor(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-
         final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
-
-        // Getting the background color of a View or ViewGroup is a bit weird.
-        // See: http://stackoverflow.com/questions/14779259/get-background-color-of-a-layout
-//        Drawable background = mainView.getBackground();
-//        if (background instanceof ColorDrawable) {
-//            _bgColorSaved = ((ColorDrawable) background).getColor();
-//        }
         _penColorSaved = doodleView.getColor();
 
         // Get the layout inflater. LayoutInflaters take a layout XML file and create its
@@ -110,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
 
         // Inflate the dialog_color.xml layout and create the View
-        View dialogView = inflater.inflate(R.layout.color_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.color_dialog, null);
+        dialogView.setBackgroundColor(doodleView.getColor());
 
         // Get access to the seakbar on this dialog.
         SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarColorDialog);
@@ -129,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 //hue is value 0 - 360. Saturation and luminance are 0-1.
                 float newPenColorHue = (progress / (float)seekBar.getMax()) * 360f;
                 doodleView.setColor(ColorUtils.HSLToColor(new float[]{newPenColorHue, 0.5f, 0.5f}));
-
+                dialogView.setBackgroundColor(ColorUtils.HSLToColor(new float[]{newPenColorHue, 0.5f, 0.5f}));
             }
 
             @Override
