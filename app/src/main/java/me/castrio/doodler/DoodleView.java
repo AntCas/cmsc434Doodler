@@ -85,6 +85,10 @@ public class DoodleView extends View {
         return this._currOpacity;
     }
 
+    public boolean getMirrorOn() {
+        return this._mirrorOn;
+    }
+
     public void setMirrorOn(boolean mirrorOn) {
         this._mirrorOn = mirrorOn;
     }

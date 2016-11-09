@@ -26,14 +26,36 @@
         android:layout_marginBottom="36dp"
         android:id="@+id/seekBarNew" />
 
+    <ToggleButton
+        android:text="ToggleButtonMirror"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickSetMirror"
+        android:id="@+id/toggleButtonMirror"
+        android:textOn="mirror off"
+        android:textOff="mirror on"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
     <Button
         android:text="Clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonClearScreen"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickSetSize"
+        android:id="@+id/roundButtonSize"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Color"
@@ -42,41 +64,16 @@
         android:id="@+id/roundButtonColor"
         android:onClick="onClickSetColor"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:onClick="onClickSetSize"
-        android:layout_toRightOf="@+id/roundButtonColor"
-        android:layout_toEndOf="@+id/roundButtonColor"
-        android:id="@+id/roundButtonSize" />
+        android:layout_toLeftOf="@+id/roundButtonSize"
+        android:layout_toStartOf="@+id/roundButtonSize" />
 
     <Button
         android:text="opacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:onClick="onClickSetOpacity"
+        android:id="@+id/roundButtonOpacity"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/roundButtonSize"
-        android:layout_toEndOf="@+id/roundButtonSize"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:id="@+id/roundButtonOpacity" />
-
-    <ToggleButton
-        android:text="ToggleButtonMirror"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/seekBarNew"
-        android:onClick="onClickSetMirror"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/toggleButtonMirror"
-        android:textOn="mirror off"
-        android:textOff="mirror on"
-        android:checked="true" />
+        android:layout_toEndOf="@+id/roundButtonSize" />
 </RelativeLayout>

@@ -209,10 +209,10 @@ public class MainActivity extends AppCompatActivity {
     public void onClickSetMirror(View v) {
         final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
         final ToggleButton toggleButtonMirror = (ToggleButton) findViewById(R.id.toggleButtonMirror);
-        if (toggleButtonMirror.isChecked()) {
-            doodleView.setMirrorOn(true);
-        } else {
+        if (doodleView.getMirrorOn()) {
             doodleView.setMirrorOn(false);
+        } else {
+            doodleView.setMirrorOn(true);
         }
     }
 
