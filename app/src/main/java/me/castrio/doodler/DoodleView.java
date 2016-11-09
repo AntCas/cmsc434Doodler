@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class DoodleView extends View {
     private ArrayList<Line> _lineList = new ArrayList<Line>();
-    private Canvas _canvas = new Canvas();
     private int _currColor;
     private int _currWidth;
     private int _currOpacity;
@@ -59,6 +58,7 @@ public class DoodleView extends View {
         _currOpacity = 255;
     }
 
+    // Getters and Setters
     public void setColor(int color) {
         _currColor = color;
     }
@@ -83,6 +83,7 @@ public class DoodleView extends View {
         return this._currOpacity;
     }
 
+    // Draw all the lines onto the canvas
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -95,25 +96,57 @@ public class DoodleView extends View {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         float touchx = motionEvent.getX();
         float touchy = motionEvent.getY();
+        float mirrorx = this.getWidth() - touchx;
+        Line invisibleLine = new Line(new Path(), new Paint());
 
+        // Primary path
         Path path;
         Paint paint = new Paint();
+
+        // x-axis mirrored path
+        Path pathMX;
+        Paint paintMX = new Paint();
+
+        // y-axis mirrored path
+        Path pathMY;
+        Paint paintMY = new Paint();
 
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 path = new Path();
+                pathMX = new Path();
+
+                // Set attributes of the current path
                 paint.setColor(_currColor);
                 paint.setStrokeWidth(_currWidth);
                 paint.setAlpha(_currOpacity);
+
+                // These are always the same
                 paint.setAntiAlias(true);
                 paint.setStyle(Paint.Style.STROKE);
+
+                // Move to start point of the path and add to Line list
                 path.moveTo(touchx, touchy);
+                pathMX.moveTo(mirrorx, touchy);
                 _lineList.add(new Line(path, paint));
+
+                if (true) {
+                    _lineList.add(new Line(pathMX, paint));
+                } else {
+                    _lineList.add(invisibleLine);
+                }
                 break;
+
             case MotionEvent.ACTION_MOVE:
-                path = _lineList.get(_lineList.size() - 1)._path;
+                // retrieve the path currently being drawn from the line list
+                path = _lineList.get(_lineList.size() - 2)._path;
+                pathMX = _lineList.get(_lineList.size() - 1)._path;
+
+                // update the path
                 path.lineTo(touchx, touchy);
+                pathMX.lineTo(mirrorx, touchy);
                 break;
+
             case MotionEvent.ACTION_UP:
                 break;
         }
