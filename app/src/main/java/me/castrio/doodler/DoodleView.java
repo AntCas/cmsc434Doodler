@@ -97,7 +97,9 @@ public class DoodleView extends View {
         float touchx = motionEvent.getX();
         float touchy = motionEvent.getY();
         float mirrorx = this.getWidth() - touchx;
-        Line invisibleLine = new Line(new Path(), new Paint());
+        Paint blankPaint = new Paint();
+        blankPaint.setAlpha(0);
+        Line invisibleLine = new Line(new Path(), blankPaint);
 
         // Primary path
         Path path;
@@ -130,7 +132,7 @@ public class DoodleView extends View {
                 pathMX.moveTo(mirrorx, touchy);
                 _lineList.add(new Line(path, paint));
 
-                if (true) {
+                if (false) {
                     _lineList.add(new Line(pathMX, paint));
                 } else {
                     _lineList.add(invisibleLine);
