@@ -35,27 +35,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penColorSaved = -1;
-    // Credit: Jon Froehlich code shared with UMD CMSC434 class
+    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetColor(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
         _penColorSaved = doodleView.getColor();
 
-        // Get the layout inflater. LayoutInflaters take a layout XML file and create its
-        // corresponding View objects. Never create LayoutInflaters directly. Always use the
-        // factory method getLayoutInflater. See https://developer.android.com/reference/android/view/LayoutInflater.html
+        // Inflate color_dialog
         LayoutInflater inflater = this.getLayoutInflater();
-
-        // Inflate the dialog_color.xml layout and create the View
         final View dialogView = inflater.inflate(R.layout.color_dialog, null);
         dialogView.setBackgroundColor(doodleView.getColor());
-
-        // Get access to the seakbar on this dialog.
         SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarColorDialog);
 
-        // Set progress bar to current hue value (in other words, when the user first sees
-        // this seek bar, it's already set to the hue value of the background)
+        // Set progress bar to current hue value
         float[] hsl = new float[3];
         ColorUtils.colorToHSL(_penColorSaved, hsl);
         int seekBarPosition = (int)((hsl[0] / 360) * (float)seekBar.getMax());
@@ -82,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // This is the method that allows us to use our own custom view. We set the AlertDialog builder
-        // to the view we created with the inflater above.
+        // Use custom view
         builder.setView(dialogView)
                 // Add action buttons
                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
@@ -94,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
                         doodleView.setColor(_penColorSaved);
                     }
                 });
@@ -104,26 +95,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penSizeSaved = -1;
-    // Credit: Jon Froehlich code shared with UMD CMSC434 class
+    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetSize(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
         _penSizeSaved = doodleView.getSize();
 
-        // Get the layout inflater. LayoutInflaters take a layout XML file and create its
-        // corresponding View objects. Never create LayoutInflaters directly. Always use the
-        // factory method getLayoutInflater. See https://developer.android.com/reference/android/view/LayoutInflater.html
+        // Inflate  size_dialog
         LayoutInflater inflater = this.getLayoutInflater();
-
-        // Inflate the dialog_color.xml layout and create the View
         final View dialogView = inflater.inflate(R.layout.size_dialog, null);
-
-        // Get access to the seakbar on this dialog.
         SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarSizeDialog);
 
-        // Set progress bar to current size value (in other words, when the user first sees
-        // this seek bar, it's already set to the size value of the current path)
+        // Set progress bar to current size value
         int seekBarPosition = (int)((_penSizeSaved / 50f) * (float)seekBar.getMax());
         seekBar.setProgress(seekBarPosition);
 
@@ -147,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // This is the method that allows us to use our own custom view. We set the AlertDialog builder
-        // to the view we created with the inflater above.
+        // Use custom view
         builder.setView(dialogView)
                 // Add action buttons
                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
@@ -159,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
                         doodleView.setSize(_penSizeSaved);
                     }
                 });
@@ -169,26 +151,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penOpacitySaved = -1;
-    // Credit: Jon Froehlich code shared with UMD CMSC434 class
+    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetOpacity(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
         _penOpacitySaved = doodleView.getOpacity();
 
-        // Get the layout inflater. LayoutInflaters take a layout XML file and create its
-        // corresponding View objects. Never create LayoutInflaters directly. Always use the
-        // factory method getLayoutInflater. See https://developer.android.com/reference/android/view/LayoutInflater.html
+        // Inflate opacity_dialog
         LayoutInflater inflater = this.getLayoutInflater();
-
-        // Inflate the dialog_color.xml layout and create the View
         final View dialogView = inflater.inflate(R.layout.opacity_dialog, null);
-
-        // Get access to the seekbar on this dialog.
         SeekBar seekBar = (SeekBar)dialogView.findViewById(R.id.seekBarOpacityDialog);
 
-        // Set progress bar to current hue value (in other words, when the user first sees
-        // this seek bar, it's already set to the hue value of the background)
+        // Set progress bar to current opacity value
         int seekBarPosition = (int)((_penOpacitySaved / 255f) * (float)seekBar.getMax());
         seekBar.setProgress(seekBarPosition);
 
@@ -212,8 +187,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // This is the method that allows us to use our own custom view. We set the AlertDialog builder
-        // to the view we created with the inflater above.
+        // Create custom view
         builder.setView(dialogView)
                 // Add action buttons
                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
@@ -224,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //DoodleView doodleView = (ViewGroup)findViewById(R.id.activity_main);
                         doodleView.setColor(_penOpacitySaved);
                     }
                 });
