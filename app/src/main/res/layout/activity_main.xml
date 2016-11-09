@@ -76,7 +76,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/toggleButtonMirror"
-        android:textOn="turn mirror off"
-        android:textOff="Turn mirror on"
+        android:textOn="mirror off"
+        android:textOff="mirror on"
         android:checked="true" />
 </RelativeLayout>
