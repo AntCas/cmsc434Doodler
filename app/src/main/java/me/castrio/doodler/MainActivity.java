@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -230,6 +231,16 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void onClickSetMirror(View v) {
+        final DoodleView doodleView = (DoodleView) findViewById(R.id.doodleView);
+        final ToggleButton toggleButtonMirror = (ToggleButton) findViewById(R.id.toggleButtonMirror);
+        if (toggleButtonMirror.isChecked()) {
+            doodleView.setMirrorOn(true);
+        } else {
+            doodleView.setMirrorOn(false);
+        }
     }
 
 

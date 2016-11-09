@@ -22,6 +22,7 @@ public class DoodleView extends View {
     private int _currColor;
     private int _currWidth;
     private int _currOpacity;
+    private boolean _mirrorOn;
     
     private class Line {
         Path _path = new Path();
@@ -56,6 +57,7 @@ public class DoodleView extends View {
         _currColor = Color.BLUE;
         _currWidth = 5;
         _currOpacity = 255;
+        _mirrorOn = false;
     }
 
     // Getters and Setters
@@ -81,6 +83,10 @@ public class DoodleView extends View {
 
     public int getOpacity() {
         return this._currOpacity;
+    }
+
+    public void setMirrorOn(boolean mirrorOn) {
+        this._mirrorOn = mirrorOn;
     }
 
     // Draw all the lines onto the canvas
@@ -145,21 +151,13 @@ public class DoodleView extends View {
                 pathMY.moveTo(touchx, mirrory);
                 pathMXY.moveTo(mirrorx, mirrory);
 
-                if (true) {
+                if (_mirrorOn) {
                     _lineList.add(new Line(pathMX, paint));
-                } else {
-                    _lineList.add(invisibleLine);
-                }
-
-                if (true) {
                     _lineList.add(new Line(pathMY, paint));
-                } else {
-                    _lineList.add(invisibleLine);
-                }
-
-                if (true) {
                     _lineList.add(new Line(pathMXY, paint));
                 } else {
+                    _lineList.add(invisibleLine);
+                    _lineList.add(invisibleLine);
                     _lineList.add(invisibleLine);
                 }
                 break;
