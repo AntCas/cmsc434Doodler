@@ -97,6 +97,9 @@ public class DoodleView extends View {
         float touchx = motionEvent.getX();
         float touchy = motionEvent.getY();
         float mirrorx = this.getWidth() - touchx;
+        float mirrory = this.getHeight() - touchy;
+
+        // create invible line
         Paint blankPaint = new Paint();
         blankPaint.setAlpha(0);
         Line invisibleLine = new Line(new Path(), blankPaint);
@@ -113,10 +116,16 @@ public class DoodleView extends View {
         Path pathMY;
         Paint paintMY = new Paint();
 
+        // x and y mirrored path
+        Path pathMXY;
+        Paint paintMXY = new Paint();
+
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 path = new Path();
                 pathMX = new Path();
+                pathMY = new Path();
+                pathMXY = new Path();
 
                 // Set attributes of the current path
                 paint.setColor(_currColor);
@@ -129,11 +138,27 @@ public class DoodleView extends View {
 
                 // Move to start point of the path and add to Line list
                 path.moveTo(touchx, touchy);
-                pathMX.moveTo(mirrorx, touchy);
                 _lineList.add(new Line(path, paint));
 
-                if (false) {
+                // handle the mirrored lines
+                pathMX.moveTo(mirrorx, touchy);
+                pathMY.moveTo(touchx, mirrory);
+                pathMXY.moveTo(mirrorx, mirrory);
+
+                if (true) {
                     _lineList.add(new Line(pathMX, paint));
+                } else {
+                    _lineList.add(invisibleLine);
+                }
+
+                if (true) {
+                    _lineList.add(new Line(pathMY, paint));
+                } else {
+                    _lineList.add(invisibleLine);
+                }
+
+                if (true) {
+                    _lineList.add(new Line(pathMXY, paint));
                 } else {
                     _lineList.add(invisibleLine);
                 }
@@ -141,12 +166,16 @@ public class DoodleView extends View {
 
             case MotionEvent.ACTION_MOVE:
                 // retrieve the path currently being drawn from the line list
-                path = _lineList.get(_lineList.size() - 2)._path;
-                pathMX = _lineList.get(_lineList.size() - 1)._path;
+                path = _lineList.get(_lineList.size() - 4)._path;
+                pathMX = _lineList.get(_lineList.size() - 3)._path;
+                pathMY = _lineList.get(_lineList.size() - 2)._path;
+                pathMXY = _lineList.get(_lineList.size() - 1)._path;
 
                 // update the path
                 path.lineTo(touchx, touchy);
                 pathMX.lineTo(mirrorx, touchy);
+                pathMY.lineTo(touchx, mirrory);
+                pathMXY.lineTo(mirrorx, mirrory);
                 break;
 
             case MotionEvent.ACTION_UP:
