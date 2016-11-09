@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penColorSaved = -1;
-    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
+    // Credit: Based on code Dr. Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetColor(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penSizeSaved = -1;
-    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
+    // Credit: Based on code Dr. Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetSize(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int _penOpacitySaved = -1;
-    // Credit: Based on code Jon Froehlich shared with his UMD CMSC434 class
+    // Credit: Based on code Dr. Jon Froehlich shared with his UMD CMSC434 class
     public void onClickSetOpacity(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
