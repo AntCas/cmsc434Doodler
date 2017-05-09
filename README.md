@@ -1,10 +1,10 @@
-====================
+
 Doodle App Prototype
 ====================
 
 This Android app was built for CMSC434 at UMD
 
-====================
+
 How To Install & Run
 ====================
 
@@ -12,7 +12,7 @@ Clone this directory into your Android Studio projects folder, then open the fil
 
 You should be able to build the app without making any changes.
 
-========
+
 Features
 ========
 
@@ -31,7 +31,7 @@ Activitate Mirror Mode:
 Toggle the mirror button at the top left of the app to turn on and off mirror mode. 
 Mirror mode reflects your doodle in all four corneres of the app, allowing you to create interesting symmetrical patters.
 
-======================
+
 References & Resources
 ======================
 
